@@ -7,14 +7,9 @@ class ModelInterface(ABC):
         pass
     
     @abstractmethod
-    def prepocess(self):
+    def preprocess(self):
         pass
     
     @abstractmethod
     def load_model(self):
-        pass
-
-    @property
-    @abstractmethod
-    def model(self):
         pass
