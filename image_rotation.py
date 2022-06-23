@@ -5,7 +5,7 @@
 # @Last Modified time: 2022-06-20 17:52:36
 
 import argparse
-from models import RotationImageTransformer
+from models import RotationImageTransformation
 from controller import AppController
     
 if __name__ == '__main__':
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     ap.add_argument('-r', '--rotation_list', nargs="+", type=int, default=[45], help='List of rotation degrees values, separated by blank space. e.g: 10 20 30')
     args = vars(ap.parse_args())
 
-    transformer = RotationImageTransformer(args['rotation_list'])
+    transformer = RotationImageTransformation(args['rotation_list'])
     if args['image_source']:
         AppController(source=args['image_source'], image_transformation=transformer, video=False)
     else:

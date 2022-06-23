@@ -1,2 +1,2 @@
 from .model import ModelInterface
-from .imageTransformer import ImageTransformationInterface
+from .imageTransformation import ImageTransformationInterface

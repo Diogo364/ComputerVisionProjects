@@ -5,7 +5,7 @@
 # @Last Modified time: 2022-06-20 17:52:36
 
 import argparse
-from models import CaffeModel
+from models import CaffeDetectorImageTransformation
 from controller import AppController
     
 if __name__ == '__main__':
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     ap.add_argument('-i', '--image_source', default=None, help='Path to image')
     args = vars(ap.parse_args())
     
-    net = CaffeModel(args['prototxt'], args['model'])
+    net = CaffeDetectorImageTransformation(args['prototxt'], args['model'])
     if args['image_source']:
         AppController(source=args['image_source'], image_transformation=net, video=False, confidence=args['confidence'])
     else:

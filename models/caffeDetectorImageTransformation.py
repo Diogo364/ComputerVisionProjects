@@ -3,7 +3,7 @@ import numpy as np
 from .interface import ModelInterface, ImageTransformationInterface
 
 
-class CaffeModel(ModelInterface, ImageTransformationInterface):
+class CaffeDetectorImageTransformation(ModelInterface, ImageTransformationInterface):
     def __init__(self, 
                 prototxt, 
                 model_path, 

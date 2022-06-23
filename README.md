@@ -47,7 +47,7 @@ Each code within the root of this project corresponds to a test using image or v
 These are the steps for you to use the power of this project's code modularization and create your own image transformation/preprocessing.
 
 ### Extends the Interface
-Your Custom Image Transformation class needs to extends the `models/interface/imageTransformer.py` interface. This only requires that you Custom class to have a \_\_call__ method in which receives as input an image and generates another as output.
+Your Custom Image Transformation class needs to extends the `models/interface/imageTransformation.py` interface. This only requires that you Custom class to have a \_\_call__ method in which receives as input an image and generates another as output.
 > Tip: As a good modularization manners, all Image Transformation classes are current in the `models` subdir.
 
 ### Create an execution code

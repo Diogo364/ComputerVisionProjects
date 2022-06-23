@@ -3,7 +3,7 @@ import numpy as np
 from .interface import ModelInterface, ImageTransformationInterface
 
 
-class RotationImageTransformer(ImageTransformationInterface):
+class RotationImageTransformation(ImageTransformationInterface):
     def __init__(self, 
                 degrees_list=[90]):
         self.degrees_list = degrees_list

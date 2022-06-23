@@ -1,2 +1,2 @@
-from .caffe import CaffeModel
-from .rotationImageTransformer import RotationImageTransformer
+from .caffeDetectorImageTransformation import CaffeDetectorImageTransformation
+from .rotationImageTransformation import RotationImageTransformation
