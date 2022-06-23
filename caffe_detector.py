@@ -18,6 +18,6 @@ if __name__ == '__main__':
     
     net = CaffeDetectorImageTransformation(args['prototxt'], args['model'])
     if args['image_source']:
-        AppController(source=args['image_source'], image_transformation=net, video=False, confidence=args['confidence'])
+        AppController(source=args['image_source'], image_transformation=net, video=False, transformation_kw=dict(confidence=args['confidence']))
     else:
-        AppController(source=0, image_transformation=net, confidence=args['confidence'])
+        AppController(source=0, image_transformation=net, transformation_kw=dict(confidence=args['confidence']))

@@ -9,7 +9,7 @@ class RotationImageTransformation(ImageTransformationInterface):
                 degrees_list: list[int]=[90]):
         self.degrees_list = degrees_list
 
-    def __call__(self, image: npt.ArrayLike, confidence: float) -> list[npt.ArrayLike]:
+    def __call__(self, image: npt.ArrayLike) -> list[npt.ArrayLike]:
         rotated_images = []
         h, w, _ = image.shape
         im_center = (w//2, h//2)
