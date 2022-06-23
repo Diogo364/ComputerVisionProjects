@@ -1,22 +1,25 @@
-import cv2
 from abc import ABC, abstractmethod
+from typing import Union
+import cv2
+import numpy.typing as npt
+from models.interface import ImageTransformationInterface
 
 
 class AbstractImageController(ABC):
     @abstractmethod
-    def __init__(self, source, image_transformation=None, transformation_kw={}):
+    def __init__(self, source: Union[int, str], image_transformation: ImageTransformationInterface=None, transformation_kw: dict={}):
         pass
 
-    def show_image(self, image, wait_key=False):
+    def show_image(self, image: npt.ArrayLike, wait_key: bool=False) -> int:
         cv2.imshow('Frame', image)
         if wait_key:
             cv2.waitKey(0)
-            return
+            return -1
         return cv2.waitKey(30) & 0xff
     
 
 class VideoController(AbstractImageController):
-    def __init__(self, source, image_transformation=None, transformation_kw={}):
+    def __init__(self, source: int, image_transformation: ImageTransformationInterface=None, transformation_kw: dict={}):
         cap = cv2.VideoCapture(source)
         while True:
             ret, frame = cap.read()
@@ -32,7 +35,7 @@ class VideoController(AbstractImageController):
         cap.release()
 
 class ImageController(AbstractImageController):
-    def __init__(self, source, image_transformation=None, transformation_kw={}):
+    def __init__(self, source: str, image_transformation: ImageTransformationInterface=None, transformation_kw: dict={}):
         image = cv2.imread(source)
 
         if image_transformation is not None:
@@ -42,7 +45,7 @@ class ImageController(AbstractImageController):
         
         self.show_image_list(image_list, wait_key=True)
 
-    def show_image_list(self, image_list, wait_key):
+    def show_image_list(self, image_list: list[npt.ArrayLike], wait_key: bool):
         for image in image_list:
             k = self.show_image(image, wait_key)
             cv2.destroyAllWindows()

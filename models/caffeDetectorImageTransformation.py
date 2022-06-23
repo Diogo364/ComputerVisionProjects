@@ -1,14 +1,15 @@
+from collections.abc import Callable
 import cv2
 import numpy as np
+import numpy.typing as npt
 from .interface import ModelInterface, ImageTransformationInterface
-
 
 class CaffeDetectorImageTransformation(ModelInterface, ImageTransformationInterface):
     def __init__(self, 
-                prototxt, 
-                model_path, 
-                model_loader=cv2.dnn.readNetFromCaffe, 
-                model_preprocess=cv2.dnn.blobFromImage):
+                prototxt: str, 
+                model_path: str, 
+                model_loader: Callable=cv2.dnn.readNetFromCaffe, 
+                model_preprocess: Callable=cv2.dnn.blobFromImage):
         self.prototxt = prototxt
         self.model_path = model_path
         self.__model_loader = model_loader
@@ -16,12 +17,12 @@ class CaffeDetectorImageTransformation(ModelInterface, ImageTransformationInterf
         self.load_model()
 
 
-    def preprocess(self, image, size=(300,300)):
+    def preprocess(self, image: npt.ArrayLike, size: tuple=(300,300)) -> npt.ArrayLike:
         prep_image = cv2.resize(image, size)
         prep_image = self.__preprocess_func(prep_image, 1.0, size, (104.0, 177.0, 123.0))
         return prep_image
     
-    def predict(self, image, size=(300,300)):
+    def predict(self, image: npt.ArrayLike, size: tuple=(300,300)) -> npt.ArrayLike:
         prep_image = self.preprocess(image, size)
         self.__model.setInput(prep_image)
         return self.__model.forward()
@@ -29,7 +30,7 @@ class CaffeDetectorImageTransformation(ModelInterface, ImageTransformationInterf
     def load_model(self):
             self.__model = self.__model_loader(self.prototxt, self.model_path)
 
-    def __call__(self, image, confidence):
+    def __call__(self, image: npt.ArrayLike, confidence: float) -> list[npt.ArrayLike]:
         h, w, _ = image.shape
         detections = self.predict(image)
         valid_detections = detections[0, 0, np.where(detections[0, 0, :, 2] > confidence)].reshape((-1, 7))

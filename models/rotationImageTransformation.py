@@ -1,14 +1,15 @@
 import cv2
 import numpy as np
+import numpy.typing as npt
 from .interface import ModelInterface, ImageTransformationInterface
 
 
 class RotationImageTransformation(ImageTransformationInterface):
     def __init__(self, 
-                degrees_list=[90]):
+                degrees_list: list[int]=[90]):
         self.degrees_list = degrees_list
 
-    def __call__(self, image, confidence):
+    def __call__(self, image: npt.ArrayLike, confidence: float) -> list[npt.ArrayLike]:
         rotated_images = []
         h, w, _ = image.shape
         im_center = (w//2, h//2)
