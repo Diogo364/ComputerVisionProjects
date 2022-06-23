@@ -1,1 +1,2 @@
 from .caffe import CaffeModel
+from .rotationImageTransformer import RotationImageTransformer
