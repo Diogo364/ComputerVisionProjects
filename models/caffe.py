@@ -47,4 +47,4 @@ class CaffeModel(ModelInterface, ImageTransformationInterface):
             cv2.rectangle(image, (x0, y0), (x1, y1), (0, 0, 255), 2)
             cv2.putText(image, text, (x0, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
             
-        return image
+        return [image]

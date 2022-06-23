@@ -22,8 +22,9 @@ class VideoController(AbstractImageController):
             ret, frame = cap.read()
 
             if image_transformation is not None:
-                frame = image_transformation(frame, **transformation_kw)
-
+                frame_list = image_transformation(frame, **transformation_kw)
+                frame = frame_list[0]
+            
             k = self.show_image(frame, wait_key=False)
             if k == 27:
                 break
@@ -35,8 +36,13 @@ class ImageController(AbstractImageController):
         image = cv2.imread(source)
 
         if image_transformation is not None:
-                image = image_transformation(image, **transformation_kw)
+                image_list = image_transformation(image, **transformation_kw)
+        else:
+            image_list = [image]
         
-        k = self.show_image(image, wait_key=True)
+        self.show_image_list(image_list, wait_key=True)
 
-        cv2.destroyAllWindows()
+    def show_image_list(self, image_list, wait_key):
+        for image in image_list:
+            k = self.show_image(image, wait_key)
+            cv2.destroyAllWindows()
