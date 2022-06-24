@@ -5,12 +5,12 @@ from .interface import ModelInterface, ImageTransformationInterface
 
 
 class RotationImageTransformation(ImageTransformationInterface):
-    def __init__(self, degrees_list: list[int]=[90]):
-        """It implements image transformation interface to rotate images.
+    """It implements image transformation interface to rotate images.
 
-        Args:
-            degrees_list (list[int], optional): List containing the rotation degree to be applied to the image. Defaults to [90].
-        """        
+    Args:
+        degrees_list (list[int], optional): List containing the rotation degree to be applied to the image. Defaults to [90].
+    """        
+    def __init__(self, degrees_list: list[int]=[90]):
         self.degrees_list = degrees_list
 
     def __call__(self, image: npt.ArrayLike, padding: bool=False) -> list[npt.ArrayLike]:

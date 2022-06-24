@@ -19,14 +19,14 @@ class AbstractImageController(ABC):
     
 
 class VideoController(AbstractImageController):
-    def __init__(self, source: int, image_transformation: ImageTransformationInterface=None, transformation_kw: dict={}):
-        """Aplication Controller to load video/webcam and apply an image transformation pipelinte in each frame.
+    """Aplication Controller to load video/webcam and apply an image transformation pipelinte in each frame.
 
-        Args:
-            source (int): Video source.
-            image_transformation (ImageTransformationInterface, optional): Image Transformation pipeline to be applied. Defaults to None.
-            transformation_kw (dict, optional): Extra variable arguments to the image_transformation pipeline. Defaults to {}.
-        """        
+    Args:
+        source (int): Video source.
+        image_transformation (ImageTransformationInterface, optional): Image Transformation pipeline to be applied. Defaults to None.
+        transformation_kw (dict, optional): Extra variable arguments to the image_transformation pipeline. Defaults to {}.
+    """        
+    def __init__(self, source: int, image_transformation: ImageTransformationInterface=None, transformation_kw: dict={}):
         cap = cv2.VideoCapture(source)
         while True:
             ret, frame = cap.read()
@@ -42,14 +42,14 @@ class VideoController(AbstractImageController):
         cap.release()
 
 class ImageController(AbstractImageController):
-    def __init__(self, source: str, image_transformation: ImageTransformationInterface=None, transformation_kw: dict={}):
-        """Aplication Controller to load an image and apply an image transformation pipelinte.
+    """Aplication Controller to load an image and apply an image transformation pipelinte.
 
-        Args:
-            source (int): Path to the image.
-            image_transformation (ImageTransformationInterface, optional): Image Transformation pipeline to be applied. Defaults to None.
-            transformation_kw (dict, optional): Extra variable arguments to the image_transformation pipeline. Defaults to {}.
-        """        
+    Args:
+        source (int): Path to the image.
+        image_transformation (ImageTransformationInterface, optional): Image Transformation pipeline to be applied. Defaults to None.
+        transformation_kw (dict, optional): Extra variable arguments to the image_transformation pipeline. Defaults to {}.
+    """        
+    def __init__(self, source: str, image_transformation: ImageTransformationInterface=None, transformation_kw: dict={}):
         image = cv2.imread(source)
 
         if image_transformation is not None:

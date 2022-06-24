@@ -5,19 +5,19 @@ import numpy.typing as npt
 from .interface import ModelInterface, ImageTransformationInterface
 
 class CaffeDetectorImageTransformation(ModelInterface, ImageTransformationInterface):    
+    """It Loads pretrained Caffe Detector models and implements image transformation interface to identify objects in the image.
+
+    Args:
+        prototxt (str): Path to .prototxt file containing model architecture.
+        model_path (str): Path to .caffemodel file containing model's weight.
+        model_loader (Callable, optional): Function to load the model using prototxt and model_path files. Defaults to cv2.dnn.readNetFromCaffe.
+        model_preprocess (Callable, optional): Function to preprocess images to input model. Defaults to cv2.dnn.blobFromImage.
+    """                
     def __init__(self, 
                 prototxt: str, 
                 model_path: str, 
                 model_loader: Callable=cv2.dnn.readNetFromCaffe, 
                 model_preprocess: Callable=cv2.dnn.blobFromImage):
-        """It Loads pretrained Caffe Detector models and implements image transformation interface to identify objects in the image.
-
-        Args:
-            prototxt (str): Path to .prototxt file containing model architecture.
-            model_path (str): Path to .caffemodel file containing model's weight.
-            model_loader (Callable, optional): Function to load the model using prototxt and model_path files. Defaults to cv2.dnn.readNetFromCaffe.
-            model_preprocess (Callable, optional): Function to preprocess images to input model. Defaults to cv2.dnn.blobFromImage.
-        """                
         self.prototxt = prototxt
         self.model_path = model_path
         self.__model_loader = model_loader
