@@ -12,10 +12,11 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('-i', '--image_source', default=None, help='Path to image')
     ap.add_argument('-r', '--rotation_list', nargs="+", type=int, default=[45], help='List of rotation degrees values, separated by blank space. e.g: 10 20 30')
+    ap.add_argument('-p', '--padding', action='store_true', help='Use this parameter to avoid image cropping after rotation')
     args = vars(ap.parse_args())
 
     transformer = RotationImageTransformation(args['rotation_list'])
     if args['image_source']:
-        AppController(source=args['image_source'], image_transformation=transformer, video=False)
+        AppController(source=args['image_source'], image_transformation=transformer, video=False, transformation_kw=dict(padding=args['padding']))
     else:
-        AppController(source=0, image_transformation=transformer)
+        AppController(source=0, image_transformation=transformer, transformation_kw=dict(padding=args['padding']))
