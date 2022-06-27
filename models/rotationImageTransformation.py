@@ -39,8 +39,8 @@ class RotationImageTransformation(ImageTransformationInterface):
         Returns:
             tuple[int]: (New height and New Width)
         """        
-        cos_value = rotation_matrix[0, 0]
-        sin_value = rotation_matrix[0, 1]
+        cos_value = abs(rotation_matrix[0, 0])
+        sin_value = abs(rotation_matrix[0, 1])
 
         h, w, _ = image.shape
         
