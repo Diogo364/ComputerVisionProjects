@@ -13,6 +13,7 @@
 
 ## About
 This is a workspace environment created to facilitate the experimentation and learning process on the `OpenCV` library and Computer Vision field. To achieve that, this code structure was built using a few of the best pratices in Software Engineeiring, promoting code reuse and an easy ready-to-use Image Transformation Interface.
+> This repo was inspired by the [**PyImageSearch Crash Course**](#references)
 
 ## Quickstart
 Each code within the root of this project corresponds to a test using image or video. To demonstrate how this repo can be used the `caffe_detector.py` script will be used.
@@ -55,6 +56,7 @@ Then, you must create your own execution code, in which you are going to import 
 > Tip: Follow the same example of the `caffe_detector.py`.
 
 ### References
+- **PyImageSearch Crash Course:** https://pyimagesearch.com/welcome-crash-course/
 - **OpenCV Github:** https://github.com/opencv/opencv
 - **OpenCV Wiki:** https://github.com/opencv/opencv/wiki
 - **OpenCV Models Instructions:** https://github.com/opencv/opencv/tree/4.x/samples/dnn
