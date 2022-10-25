@@ -1,3 +1,4 @@
+from typing import List, Tuple
 import cv2
 import numpy as np
 import numpy.typing as npt
@@ -48,7 +49,7 @@ class BubbleExtractorImageTransformation(ImageTransformationInterface):
                 self._question_cnts.append(cnt)
 
     @staticmethod
-    def __extract_answer_bubble(image: npt.ArrayLike, bubbles: npt.ArrayLike) -> tuple[int, int]:
+    def __extract_answer_bubble(image: npt.ArrayLike, bubbles: npt.ArrayLike) -> Tuple[int, int]:
         """Identify the answered bubble from a list of bubbles.
 
         Args:
@@ -83,7 +84,7 @@ class BubbleExtractorImageTransformation(ImageTransformationInterface):
             self.__answer_contours.append(left_right_bubbles[answer_id])
 
     
-    def __call__(self, image: npt.ArrayLike) -> list[npt.ArrayLike]:
+    def __call__(self, image: npt.ArrayLike) -> List[npt.ArrayLike]:
         smart_cropped_image = self.__doc_scanner(image.copy(), binarization=False)[0]
         processed_image = cv2.cvtColor(smart_cropped_image, cv2.COLOR_BGR2GRAY)
         binary_image = cv2.threshold(processed_image, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]

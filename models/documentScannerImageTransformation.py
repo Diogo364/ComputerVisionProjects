@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, List
 import cv2
 import numpy as np
 import numpy.typing as npt
@@ -109,7 +109,7 @@ class DocumentScannerImageTransformation(ImageTransformationInterface):
         gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         return cv2.adaptiveThreshold(gray_image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 10)
 
-    def __call__(self, image: npt.ArrayLike, smart_crop=True, binarization=True) -> list[npt.ArrayLike]:
+    def __call__(self, image: npt.ArrayLike, smart_crop=True, binarization=True) -> List[npt.ArrayLike]:
         """Apply Document Scanner effect to image.
 
         Args:

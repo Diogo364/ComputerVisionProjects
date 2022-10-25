@@ -1,3 +1,4 @@
+from typing import List, Tuple
 from collections.abc import Callable
 import cv2
 import dlib
@@ -24,7 +25,7 @@ class DlibLandmarkDetectorImageTransformation(ModelInterface, ImageTransformatio
 
 
     @staticmethod
-    def _get_point_coordinates(pt: dlib.point) -> tuple[int]:
+    def _get_point_coordinates(pt: dlib.point) -> Tuple[int]:
         """Extract (x, y) coordinates from point object.
 
         Args:
@@ -48,7 +49,7 @@ class DlibLandmarkDetectorImageTransformation(ModelInterface, ImageTransformatio
         br_corner = rect.br_corner()
         return self._get_point_coordinates(tl_corner), self._get_point_coordinates(br_corner)
     
-    def preprocess(self, image: npt.ArrayLike, num_upsamples: int=1) -> tuple[npt.ArrayLike, dlib.rectangles]:
+    def preprocess(self, image: npt.ArrayLike, num_upsamples: int=1) -> Tuple[npt.ArrayLike, dlib.rectangles]:
         """Preprocesses image to loaded model detecting all faces within the image.
 
         Args:
@@ -85,7 +86,7 @@ class DlibLandmarkDetectorImageTransformation(ModelInterface, ImageTransformatio
     def load_model(self):
             self.__model = self.__model_loader(self.model_path)
 
-    def __call__(self, image: npt.ArrayLike, num_upsamples: int=1) -> list[npt.ArrayLike]:
+    def __call__(self, image: npt.ArrayLike, num_upsamples: int=1) -> List[npt.ArrayLike]:
         """Abstracts whole prediction pipeline to transform input image to output image with objects detected.
 
         Args:

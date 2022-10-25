@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, List, Tuple
 import cv2
 import numpy as np
 import numpy.typing as npt
@@ -51,7 +51,7 @@ class ObjectMeasureImageTransformation(ImageTransformationInterface):
         for x, y in box:
             cv2.circle(image, (x, y), 5, (0, 0, 255), -1)
     
-    def _extract_interest_points(self, box: npt.ArrayLike) -> tuple[tuple]:
+    def _extract_interest_points(self, box: npt.ArrayLike) -> Tuple[tuple]:
         """Extract middle point from each rectangle vertice.
 
         Args:
@@ -123,7 +123,7 @@ class ObjectMeasureImageTransformation(ImageTransformationInterface):
         cv2.putText(image, "{:.1f}cm".format(measured_h), (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
         
 
-    def __call__(self, image: npt.ArrayLike, known_size: float=10.0, width=False) -> list[npt.ArrayLike]:
+    def __call__(self, image: npt.ArrayLike, known_size: float=10.0, width=False) -> List[npt.ArrayLike]:
         image = GenericTransformations.smart_resize(image, size=600, height=False)
         processed_image = cv2.GaussianBlur(image, (7, 7), 1)
         processed_image = cv2.erode(processed_image, None, iterations=1)

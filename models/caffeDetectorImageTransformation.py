@@ -1,3 +1,4 @@
+from typing import List
 from collections.abc import Callable
 import cv2
 import numpy as np
@@ -56,7 +57,7 @@ class CaffeDetectorImageTransformation(ModelInterface, ImageTransformationInterf
     def load_model(self):
             self.__model = self.__model_loader(self.prototxt, self.model_path)
 
-    def __call__(self, image: npt.ArrayLike, confidence: float) -> list[npt.ArrayLike]:
+    def __call__(self, image: npt.ArrayLike, confidence: float) -> List[npt.ArrayLike]:
         """Abstracts whole prediction pipeline to transform input image to output image with objects detected.
 
         Args:

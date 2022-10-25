@@ -1,3 +1,4 @@
+from typing import List, Tuple
 import cv2
 import numpy as np
 import numpy.typing as npt
@@ -10,10 +11,10 @@ class RotationImageTransformation(ImageTransformationInterface):
     Args:
         degrees_list (list[int], optional): List containing the rotation degree to be applied to the image. Defaults to [90].
     """        
-    def __init__(self, degrees_list: list[int]=[90]):
+    def __init__(self, degrees_list: List[int]=[90]):
         self.degrees_list = degrees_list
 
-    def __call__(self, image: npt.ArrayLike, padding: bool=False) -> list[npt.ArrayLike]:
+    def __call__(self, image: npt.ArrayLike, padding: bool=False) -> List[npt.ArrayLike]:
         rotated_images = []
         for rotation_degree in self.degrees_list:
             h, w, _ = image.shape
@@ -29,7 +30,7 @@ class RotationImageTransformation(ImageTransformationInterface):
             rotated_images.append(image_sample)
         return rotated_images
 
-    def __add_padding(self, image: npt.ArrayLike, rotation_matrix: npt.ArrayLike) -> tuple[int]:
+    def __add_padding(self, image: npt.ArrayLike, rotation_matrix: npt.ArrayLike) -> Tuple[int]:
         """Transform rotation matrix to apply padding and avoid image cropping (Based on pyimagesearch tutorial https://pyimagesearch.com/2017/01/02/rotate-images-correctly-with-opencv-and-python/).
 
         Args:
@@ -52,7 +53,7 @@ class RotationImageTransformation(ImageTransformationInterface):
         return new_h, new_w
     
     @staticmethod
-    def __calculate_rotated_output_dimensions(h: int, w:int, sin_value:float, cos_value:float) -> tuple[int]:
+    def __calculate_rotated_output_dimensions(h: int, w:int, sin_value:float, cos_value:float) -> Tuple[int]:
         new_h = int((h * cos_value) + (w * sin_value))
         new_w = int((w * cos_value) + (h * sin_value))
         return new_h, new_w
